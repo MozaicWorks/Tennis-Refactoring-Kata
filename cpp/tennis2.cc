@@ -1,4 +1,4 @@
-#include <string>
+#include "tennis.h"
 
 const std::string tennis_score(int p1Score, int p2Score) {
     std::string score = "";
