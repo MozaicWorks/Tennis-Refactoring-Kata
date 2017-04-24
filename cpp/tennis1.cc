@@ -1,36 +1,72 @@
 #include <map>
 #include "tennis.h"
 
-std::string getEqualScoreName(int score);
+std::string formatScoreWhenEqual(int score);
 
-std::string getScoreAsString(int tempScore);
+std::string formatScore(int tempScore);
 
-const std::string tennis_score(int p1Score, int p2Score) {
-    std::string score = "";
-    int tempScore = 0;
-    bool equalScore = (p1Score == p2Score);
+std::string formatScore(int playerOneScore, int playerTwoScore);
+
+std::string formatScoreWhenAdvantageOrWin(int playerOneScore, int playerTwoScore);
+
+std::string formatScoreWhenEqual(std::string firstScore);
+
+std::string formatAdvantage(const std::string &playerName);
+
+std::string formatWin(const std::string &playerOneName);
+
+const std::string tennis_score(int playerOneScore, int playerTwoScore) {
+    std::string score;
+
+    bool equalScore = (playerOneScore == playerTwoScore);
     if (equalScore) {
-        score = getEqualScoreName(p1Score);
-    } else if (p1Score >= 4 || p2Score >= 4) {
-        int minusResult = p1Score - p2Score;
-        if (minusResult == 1) score = "Advantage player1";
-        else if (minusResult == -1) score = "Advantage player2";
-        else if (minusResult >= 2) score = "Win for player1";
-        else score = "Win for player2";
-    } else {
-        for (int i = 1; i < 3; i++) {
-            if (i == 1) tempScore = p1Score;
-            else {
-                score += "-";
-                tempScore = p2Score;
-            }
-            score += getScoreAsString(tempScore);
-        }
+        score = formatScoreWhenEqual(playerOneScore);
+    }
+
+    bool atLeastOnePlayerHasScoreOverForty = (playerOneScore >= 4 || playerTwoScore >= 4);
+    bool isAdvantageOrWin = (!equalScore && atLeastOnePlayerHasScoreOverForty);
+    if (isAdvantageOrWin) {
+        score = formatScoreWhenAdvantageOrWin(playerOneScore, playerTwoScore);
+    }
+
+    bool isDifferentAndBeforeAdvantagesOrWin = (!equalScore && !atLeastOnePlayerHasScoreOverForty);
+    if (isDifferentAndBeforeAdvantagesOrWin) {
+        score = formatScore(playerOneScore, playerTwoScore);
     }
     return score;
 }
 
-std::string getScoreAsString(int tempScore) {
+std::string formatScoreWhenAdvantageOrWin(int playerOneScore, int playerTwoScore) {
+    std::string score;
+    int minusResult = playerOneScore - playerTwoScore;
+    const std::string playerOneName = "player1";
+    const std::string playerTwoName = "player2";
+
+    bool isAdvantagePlayerOne = (minusResult == 1);
+    bool isAdvantagePlayerTwo = (minusResult == -1);
+    bool playerOneWins = (minusResult >= 2);
+    bool playerTwoWins = minusResult <= -2;
+
+    if (isAdvantagePlayerOne) score = formatAdvantage(playerOneName);
+    if (isAdvantagePlayerTwo) score = formatAdvantage(playerTwoName);
+    if (playerOneWins) score = formatWin(playerOneName);
+    if (playerTwoWins) score = formatWin(playerTwoName);
+    return score;
+}
+
+std::string formatWin(const std::string &playerOneName) {
+    return "Win for " + playerOneName;
+}
+
+std::string formatAdvantage(const std::string &playerName) {
+    return "Advantage " + playerName;
+}
+
+std::string formatScore(int playerOneScore, int playerTwoScore) {
+    return formatScore(playerOneScore) + SEPARATOR + formatScore(playerTwoScore);
+}
+
+std::string formatScore(int tempScore) {
     std::map<int, std::string> scoresToStrings = {
             {0, "Love"},
             {1, "Fifteen"},
@@ -40,14 +76,17 @@ std::string getScoreAsString(int tempScore) {
     return scoresToStrings[tempScore];
 }
 
-std::string getEqualScoreName(int score) {
+std::string formatScoreWhenEqual(int score) {
     static std::map<int, std::string> equalScoreValuesToStrings = {
-            {0, "Love-All"},
-            {1, "Fifteen-All"},
-            {2, "Thirty-All"},
-            {3, "Deuce"}
+            {0, "Love"},
+            {1, "Fifteen"},
+            {2, "Thirty"}
     };
 
     if (equalScoreValuesToStrings.find(score) == equalScoreValuesToStrings.end()) return "Deuce";
-    return equalScoreValuesToStrings[score];
+    return formatScoreWhenEqual(equalScoreValuesToStrings[score]);
+}
+
+std::string formatScoreWhenEqual(std::string firstScore) {
+    return firstScore + SEPARATOR + "All";
 }
