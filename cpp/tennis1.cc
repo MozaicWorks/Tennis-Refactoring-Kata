@@ -3,10 +3,9 @@
 #include "ScoreFormatter.h"
 #include "EqualScoreFormatter.h"
 #include "WinFormatter.h"
+#include "cmake-build-debug/AdvantageFormatter.h"
 
 std::string formatScoreWhenAdvantageOrWin(int playerOneScore, int playerTwoScore);
-
-std::string formatAdvantage(const std::string &playerName);
 
 const std::string tennis_score(int playerOneScore, int playerTwoScore) {
     EqualScoreFormatter equalScoreFormatter;
@@ -33,17 +32,21 @@ const std::string tennis_score(int playerOneScore, int playerTwoScore) {
 
 std::string formatScoreWhenAdvantageOrWin(int playerOneScore, int playerTwoScore) {
     WinFormatter winFormatter;
+    AdvantageFormatter advantageFormatter;
+
     int scoreDifference = playerOneScore - playerTwoScore;
     const std::string playerOneName = "player1";
     const std::string playerTwoName = "player2";
 
     bool playerOneHasAdvantage = (scoreDifference == 1);
-    if (playerOneHasAdvantage)
-        return formatAdvantage(playerOneName);
+    if (playerOneHasAdvantage) {
+        return advantageFormatter.format(playerOneName);
+    }
 
     bool playerTwoHasAdvantage = (scoreDifference == -1);
-    if (playerTwoHasAdvantage)
-        return formatAdvantage(playerTwoName);
+    if (playerTwoHasAdvantage) {
+        return advantageFormatter.format(playerTwoName);
+    }
 
     bool playerOneWins = (scoreDifference >= 2);
     if (playerOneWins) {
@@ -56,8 +59,4 @@ std::string formatScoreWhenAdvantageOrWin(int playerOneScore, int playerTwoScore
     }
 
     return DEFAULT_SCORE_FORMAT;
-}
-
-std::string formatAdvantage(const std::string &playerName) {
-    return "Advantage " + playerName;
 }

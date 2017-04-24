@@ -11,7 +11,7 @@ set(SOURCE_FILES
         #         tennis2.cc
         #         tennis3.cc
         test_suite.tests.cpp
-        tennis.h ScoreFormatter.cpp ScoreFormatter.h EqualScoreFormatter.cpp EqualScoreFormatter.h WinFormatter.cpp WinFormatter.h)
+        tennis.h ScoreFormatter.cpp ScoreFormatter.h EqualScoreFormatter.cpp EqualScoreFormatter.h WinFormatter.cpp WinFormatter.h cmake-build-debug/AdvantageFormatter.cpp cmake-build-debug/AdvantageFormatter.h)
 
 add_executable(run.tests ${SOURCE_FILES})
 add_custom_target(runAllTests ALL COMMAND run.tests)
