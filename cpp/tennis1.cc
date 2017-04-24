@@ -38,14 +38,14 @@ const std::string tennis_score(int playerOneScore, int playerTwoScore) {
 
 std::string formatScoreWhenAdvantageOrWin(int playerOneScore, int playerTwoScore) {
     std::string score;
-    int minusResult = playerOneScore - playerTwoScore;
+    int scoreDifference = playerOneScore - playerTwoScore;
     const std::string playerOneName = "player1";
     const std::string playerTwoName = "player2";
 
-    bool isAdvantagePlayerOne = (minusResult == 1);
-    bool isAdvantagePlayerTwo = (minusResult == -1);
-    bool playerOneWins = (minusResult >= 2);
-    bool playerTwoWins = minusResult <= -2;
+    bool isAdvantagePlayerOne = (scoreDifference == 1);
+    bool isAdvantagePlayerTwo = (scoreDifference == -1);
+    bool playerOneWins = (scoreDifference >= 2);
+    bool playerTwoWins = scoreDifference <= -2;
 
     if (isAdvantagePlayerOne) score = formatAdvantage(playerOneName);
     if (isAdvantagePlayerTwo) score = formatAdvantage(playerTwoName);
