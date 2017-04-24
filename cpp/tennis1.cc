@@ -1,5 +1,6 @@
 #include <map>
 #include "tennis.h"
+#include "ScoreFormatter.h"
 
 std::string formatScoreWhenEqual(int score);
 
@@ -9,9 +10,7 @@ std::string formatScoreWhenDifferentAndBeforeAdvantagesOrWin(int playerOneScore,
 
 std::string formatAdvantage(const std::string &playerName);
 
-std::string formatWin(const std::string &playerOneName);
-
-std::string formatScore(int score);
+std::string formatWin(const std::string &playerName);
 
 const std::string tennis_score(int playerOneScore, int playerTwoScore) {
     bool equalScore = (playerOneScore == playerTwoScore);
@@ -57,8 +56,8 @@ std::string formatScoreWhenAdvantageOrWin(int playerOneScore, int playerTwoScore
     return DEFAULT_SCORE_FORMAT;
 }
 
-std::string formatWin(const std::string &playerOneName) {
-    return "Win for " + playerOneName;
+std::string formatWin(const std::string &playerName) {
+    return "Win for " + playerName;
 }
 
 std::string formatAdvantage(const std::string &playerName) {
@@ -66,17 +65,8 @@ std::string formatAdvantage(const std::string &playerName) {
 }
 
 std::string formatScoreWhenDifferentAndBeforeAdvantagesOrWin(int playerOneScore, int playerTwoScore) {
-    return formatScore(playerOneScore) + SEPARATOR + formatScore(playerTwoScore);
-}
-
-std::string formatScore(int score) {
-    std::map<int, std::string> scoresToStrings = {
-            {0, "Love"},
-            {1, "Fifteen"},
-            {2, "Thirty"},
-            {3, "Forty"}
-    };
-    return scoresToStrings[score];
+    ScoreFormatter scoreFormatter;
+    return scoreFormatter.formatScore(playerOneScore) + SEPARATOR + scoreFormatter.formatScore(playerTwoScore);
 }
 
 std::string formatScoreWhenEqual(int score) {
