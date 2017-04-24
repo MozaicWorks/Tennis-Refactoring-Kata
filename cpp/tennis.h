@@ -1,9 +1,12 @@
 #ifndef CPP_TENNIS_H
 #define CPP_TENNIS_H
 
-static const char *const SEPARATOR = "-";
-
 #include <string>
+
+static const std::string SEPARATOR = "-";
+
+static const std::string DEFAULT_SCORE_FORMAT = "";
+
 
 const std::string tennis_score(int playerOneScore, int playerTwoScore);
 
