@@ -3,7 +3,7 @@
 #include "ScoreFormatter.h"
 #include "EqualScoreFormatter.h"
 #include "WinFormatter.h"
-#include "cmake-build-debug/AdvantageFormatter.h"
+#include "AdvantageFormatter.h"
 
 std::string formatScoreWhenAdvantageOrWin(int playerOneScore, int playerTwoScore);
 
