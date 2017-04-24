@@ -4,6 +4,7 @@
 #include "EqualScoreFormatter.h"
 #include "WinFormatter.h"
 #include "AdvantageFormatter.h"
+#include "Player.h"
 
 std::string formatScoreWhenAdvantageOrWin(int playerOneScore, int playerTwoScore);
 
@@ -35,8 +36,10 @@ std::string formatScoreWhenAdvantageOrWin(int playerOneScore, int playerTwoScore
     AdvantageFormatter advantageFormatter;
 
     int scoreDifference = playerOneScore - playerTwoScore;
-    const std::string playerOneName = "player1";
-    const std::string playerTwoName = "player2";
+    Player playerOne(playerOneScore, "player1");
+    Player playerTwo(playerTwoScore, "player2");
+    const std::string playerOneName = playerOne.getName();
+    const std::string playerTwoName = playerTwo.getName();
 
     bool playerOneHasAdvantage = (scoreDifference == 1);
     if (playerOneHasAdvantage) {
