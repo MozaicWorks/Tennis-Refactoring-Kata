@@ -6,59 +6,58 @@
 #include "AdvantageFormatter.h"
 #include "Player.h"
 
-std::string formatScoreWhenAdvantageOrWin(int playerOneScore, int playerTwoScore);
+std::string formatScoreWhenAdvantageOrWin(Player &playerOne, Player &playerTwo);
 
 const std::string tennis_score(int playerOneScore, int playerTwoScore) {
     EqualScoreFormatter equalScoreFormatter;
     ScoreFormatter scoreFormatter;
+    Player playerOne(playerOneScore, "player1");
+    Player playerTwo(playerTwoScore, "player2");
 
-    bool equalScore = (playerOneScore == playerTwoScore);
+    bool equalScore = (playerOne.getScore() == playerTwo.getScore());
     if (equalScore) {
-        return equalScoreFormatter.getValue(playerOneScore);
+        return equalScoreFormatter.getValue(playerOne.getScore());
     }
 
-    bool atLeastOnePlayerHasScoreOverForty = (playerOneScore >= 4 || playerTwoScore >= 4);
+    bool atLeastOnePlayerHasScoreOverForty = (playerOne.getScore() >= 4 || playerTwo.getScore() >= 4);
     bool isAdvantageOrWin = (!equalScore && atLeastOnePlayerHasScoreOverForty);
     if (isAdvantageOrWin) {
-        return formatScoreWhenAdvantageOrWin(playerOneScore, playerTwoScore);
+        return formatScoreWhenAdvantageOrWin(playerOne, playerTwo);
     }
 
     bool isDifferentAndBeforeAdvantagesOrWin = (!equalScore && !atLeastOnePlayerHasScoreOverForty);
     if (isDifferentAndBeforeAdvantagesOrWin) {
-        return scoreFormatter.formatScore(playerOneScore) + SEPARATOR + scoreFormatter.formatScore(playerTwoScore);
+        return scoreFormatter.formatScore(playerOne.getScore()) + SEPARATOR +
+               scoreFormatter.formatScore(playerTwo.getScore());
     }
 
     return DEFAULT_SCORE_FORMAT;
 }
 
-std::string formatScoreWhenAdvantageOrWin(int playerOneScore, int playerTwoScore) {
+std::string formatScoreWhenAdvantageOrWin(Player &playerOne, Player &playerTwo) {
     WinFormatter winFormatter;
     AdvantageFormatter advantageFormatter;
 
-    int scoreDifference = playerOneScore - playerTwoScore;
-    Player playerOne(playerOneScore, "player1");
-    Player playerTwo(playerTwoScore, "player2");
-    const std::string playerOneName = playerOne.getName();
-    const std::string playerTwoName = playerTwo.getName();
+    int scoreDifference = playerOne.getScore() - playerTwo.getScore();
 
     bool playerOneHasAdvantage = (scoreDifference == 1);
     if (playerOneHasAdvantage) {
-        return advantageFormatter.format(playerOneName);
+        return advantageFormatter.format(playerOne.getName());
     }
 
     bool playerTwoHasAdvantage = (scoreDifference == -1);
     if (playerTwoHasAdvantage) {
-        return advantageFormatter.format(playerTwoName);
+        return advantageFormatter.format(playerTwo.getName());
     }
 
     bool playerOneWins = (scoreDifference >= 2);
     if (playerOneWins) {
-        return winFormatter.format(playerOneName);
+        return winFormatter.format(playerOne.getName());
     }
 
     bool playerTwoWins = scoreDifference <= -2;
     if (playerTwoWins) {
-        return winFormatter.format(playerTwoName);
+        return winFormatter.format(playerTwo.getName());
     }
 
     return DEFAULT_SCORE_FORMAT;
