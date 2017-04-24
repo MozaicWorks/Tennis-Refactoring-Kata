@@ -1,6 +1,7 @@
+#include <map>
 #include "tennis.h"
 
-std::string getEqualScoreName(int p1Score);
+std::string getEqualScoreName(int score);
 
 const std::string tennis_score(int p1Score, int p2Score) {
     std::string score = "";
@@ -44,23 +45,14 @@ const std::string tennis_score(int p1Score, int p2Score) {
     return score;
 }
 
-std::string getEqualScoreName(int p1Score) {
-    std::string localScore = "";
-    switch (p1Score)
-        {
-            case 0:
-                localScore = "Love-All";
-                break;
-            case 1:
-                localScore = "Fifteen-All";
-                break;
-            case 2:
-                localScore = "Thirty-All";
-                break;
-            default:
-                localScore = "Deuce";
-                break;
+std::string getEqualScoreName(int score) {
+    static std::map<int,std::string> equalScoreValuesToStrings = {
+            {0, "Love-All"},
+            {1, "Fifteen-All"},
+            {2, "Thirty-All"},
+            {3, "Deuce"}
+    };
 
-        }
-    return localScore;
+    if(equalScoreValuesToStrings.find(score) == equalScoreValuesToStrings.end()) return "Deuce";
+    return equalScoreValuesToStrings[score];
 }
