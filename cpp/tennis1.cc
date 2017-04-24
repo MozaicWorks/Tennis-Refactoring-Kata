@@ -1,6 +1,6 @@
 #include "tennis.h"
 
-std::string &getEqualScoreName(int p1Score, std::string &score);
+std::string getEqualScoreName(int p1Score);
 
 const std::string tennis_score(int p1Score, int p2Score) {
     std::string score = "";
@@ -8,7 +8,7 @@ const std::string tennis_score(int p1Score, int p2Score) {
     bool equalScore = (p1Score == p2Score);
     if (equalScore)
     {
-        score = getEqualScoreName(p1Score, score);
+        score = getEqualScoreName(p1Score);
     }
     else if (p1Score>=4 || p2Score>=4)
     {
@@ -44,22 +44,23 @@ const std::string tennis_score(int p1Score, int p2Score) {
     return score;
 }
 
-std::string &getEqualScoreName(int p1Score, std::string &score) {
+std::string getEqualScoreName(int p1Score) {
+    std::string localScore = "";
     switch (p1Score)
         {
             case 0:
-                score = "Love-All";
+                localScore = "Love-All";
                 break;
             case 1:
-                score = "Fifteen-All";
+                localScore = "Fifteen-All";
                 break;
             case 2:
-                score = "Thirty-All";
+                localScore = "Thirty-All";
                 break;
             default:
-                score = "Deuce";
+                localScore = "Deuce";
                 break;
 
         }
-    return score;
+    return localScore;
 }
