@@ -42,13 +42,13 @@ std::string formatScoreWhenAdvantageOrWin(int playerOneScore, int playerTwoScore
     const std::string playerOneName = "player1";
     const std::string playerTwoName = "player2";
 
-    bool isAdvantagePlayerOne = (scoreDifference == 1);
-    bool isAdvantagePlayerTwo = (scoreDifference == -1);
+    bool playerOneHasAdvantage = (scoreDifference == 1);
+    bool playerTwoHasAdvantage = (scoreDifference == -1);
     bool playerOneWins = (scoreDifference >= 2);
     bool playerTwoWins = scoreDifference <= -2;
 
-    if (isAdvantagePlayerOne) score = formatAdvantage(playerOneName);
-    if (isAdvantagePlayerTwo) score = formatAdvantage(playerTwoName);
+    if (playerOneHasAdvantage) score = formatAdvantage(playerOneName);
+    if (playerTwoHasAdvantage) score = formatAdvantage(playerTwoName);
     if (playerOneWins) score = formatWin(playerOneName);
     if (playerTwoWins) score = formatWin(playerTwoName);
     return score;
