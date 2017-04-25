@@ -5,16 +5,13 @@
 #include "WinFormatter.h"
 #include "AdvantageFormatter.h"
 #include "Player.h"
+#include "EqualScoreRule.h"
 
 std::string formatScoreWhenAdvantageOrWin(Player &playerOne, Player &playerTwo);
-
-bool isEqualScore(const Player &playerOne, const Player &playerTwo);
 
 bool isAdvantageOrWin(const Player &playerOne, const Player &playerTwo);
 
 bool isScoreNotEqualAndBeforeAdvantageOrWin(const Player &playerOne, const Player &playerTwo);
-
-std::string formatEqualScore(const Player &playerOne, EqualScoreFormatter &equalScoreFormatter);
 
 std::string formatScoreWhenDifferentAndBeforeAdvantageOrWin(const Player &playerOne, const Player &playerTwo,
                                                             ScoreFormatter &scoreFormatter);
@@ -26,10 +23,12 @@ const std::string tennis_score(int playerOneScore, int playerTwoScore) {
     EqualScoreFormatter equalScoreFormatter;
     ScoreFormatter scoreFormatter;
 
-    if (isEqualScore(playerOne, playerTwo)) {
-        return formatEqualScore(playerOne, equalScoreFormatter);
-    }
+    EqualScoreRule equalScoreRule;
 
+
+    if (equalScoreRule.isEqualScore(playerOne, playerTwo)) {
+        return equalScoreRule.formatEqualScore(playerOne, equalScoreFormatter);
+    }
     if (isAdvantageOrWin(playerOne, playerTwo)) {
         return formatScoreWhenAdvantageOrWin(playerOne, playerTwo);
     }
@@ -48,10 +47,6 @@ std::string formatScoreWhenDifferentAndBeforeAdvantageOrWin(const Player &player
            + scoreFormatter.formatScore(playerTwo.getScore());
 }
 
-std::string formatEqualScore(const Player &playerOne, EqualScoreFormatter &equalScoreFormatter) {
-    return equalScoreFormatter.getValue(playerOne.getScore());
-}
-
 bool isScoreNotEqualAndBeforeAdvantageOrWin(const Player &playerOne, const Player &playerTwo) {
     return (!(playerOne.getScore() == playerTwo.getScore()) &&
             !(playerOne.getScore() >= 4 || playerTwo.getScore() >= 4));
@@ -60,10 +55,6 @@ bool isScoreNotEqualAndBeforeAdvantageOrWin(const Player &playerOne, const Playe
 bool isAdvantageOrWin(const Player &playerOne, const Player &playerTwo) {
     return (!(playerOne.getScore() == playerTwo.getScore()) &&
             (playerOne.getScore() >= 4 || playerTwo.getScore() >= 4));
-}
-
-bool isEqualScore(const Player &playerOne, const Player &playerTwo) {
-    return (playerOne.getScore() == playerTwo.getScore());
 }
 
 std::string formatScoreWhenAdvantageOrWin(Player &playerOne, Player &playerTwo) {
