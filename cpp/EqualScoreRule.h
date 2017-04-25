@@ -4,10 +4,14 @@
 
 class EqualScoreRule {
 public:
-    bool isEqualScore(const Player &playerOne, const Player &playerTwo);
+    EqualScoreRule(EqualScoreFormatter &formatter);
 
-    std::string formatEqualScore(const Player &playerOne, EqualScoreFormatter &equalScoreFormatter);
+    bool verifies(const Player &playerOne, const Player &playerTwo);
 
+    std::string format(const Player &playerOne);
+
+private:
+    EqualScoreFormatter formatter;
 };
 
 #endif //CPP_EQUALSCORERULE_H

@@ -3,10 +3,14 @@
 #include <map>
 #include "EqualScoreRule.h"
 
-std::string EqualScoreRule::formatEqualScore(const Player &playerOne, EqualScoreFormatter &equalScoreFormatter) {
-    return equalScoreFormatter.getValue(playerOne.getScore());
+std::string EqualScoreRule::format(const Player &playerOne) {
+    return formatter.getValue(playerOne.getScore());
 }
 
-bool EqualScoreRule::isEqualScore(const Player &playerOne, const Player &playerTwo) {
+bool EqualScoreRule::verifies(const Player &playerOne, const Player &playerTwo) {
     return (playerOne.getScore() == playerTwo.getScore());
+}
+
+EqualScoreRule::EqualScoreRule(EqualScoreFormatter &formatter) {
+    this->formatter = formatter;
 }

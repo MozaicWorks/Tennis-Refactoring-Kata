@@ -21,13 +21,12 @@ const std::string tennis_score(int playerOneScore, int playerTwoScore) {
     Player playerTwo(playerTwoScore, "player2");
 
     EqualScoreFormatter equalScoreFormatter;
+    EqualScoreRule equalScoreRule(equalScoreFormatter);
+
     ScoreFormatter scoreFormatter;
 
-    EqualScoreRule equalScoreRule;
-
-
-    if (equalScoreRule.isEqualScore(playerOne, playerTwo)) {
-        return equalScoreRule.formatEqualScore(playerOne, equalScoreFormatter);
+    if (equalScoreRule.verifies(playerOne, playerTwo)) {
+        return equalScoreRule.format(playerOne);
     }
     if (isAdvantageOrWin(playerOne, playerTwo)) {
         return formatScoreWhenAdvantageOrWin(playerOne, playerTwo);
