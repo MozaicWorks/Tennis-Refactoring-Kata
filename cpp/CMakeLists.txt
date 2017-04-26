@@ -11,7 +11,7 @@ set(SOURCE_FILES
         #         tennis2.cc
         #         tennis3.cc
         test_suite.tests.cpp
-        tennis.h ScoreFormatter.cpp ScoreFormatter.h EqualScoreFormatter.cpp EqualScoreFormatter.h WinFormatter.cpp WinFormatter.h AdvantageFormatter.cpp AdvantageFormatter.h Player.cpp Player.h EqualScoreRule.cpp EqualScoreRule.h AdvantageOrWinRule.cpp AdvantageOrWinRule.h)
+        tennis.h ScoreFormatter.cpp ScoreFormatter.h EqualScoreFormatter.cpp EqualScoreFormatter.h WinFormatter.cpp WinFormatter.h AdvantageFormatter.cpp AdvantageFormatter.h Player.cpp Player.h EqualScoreRule.cpp EqualScoreRule.h AdvantageOrWinRule.cpp AdvantageOrWinRule.h DifferentAndBeforeAdvantageRule.cpp DifferentAndBeforeAdvantageRule.h)
 
 add_executable(run.tests ${SOURCE_FILES})
 add_custom_target(runAllTests ALL COMMAND run.tests)

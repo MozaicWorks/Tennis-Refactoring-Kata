@@ -5,11 +5,7 @@
 #include "Player.h"
 #include "EqualScoreRule.h"
 #include "AdvantageOrWinRule.h"
-
-bool isScoreNotEqualAndBeforeAdvantageOrWin(const Player &playerOne, const Player &playerTwo);
-
-std::string formatScoreWhenDifferentAndBeforeAdvantageOrWin(const Player &playerOne, const Player &playerTwo,
-                                                            ScoreFormatter &scoreFormatter);
+#include "DifferentAndBeforeAdvantageRule.h"
 
 const std::string tennis_score(int playerOneScore, int playerTwoScore) {
     Player playerOne(playerOneScore, "player1");
@@ -19,8 +15,9 @@ const std::string tennis_score(int playerOneScore, int playerTwoScore) {
     EqualScoreRule equalScoreRule(equalScoreFormatter);
 
     AdvantageOrWinRule advantageOrWinRule;
-    ScoreFormatter scoreFormatter;
 
+    ScoreFormatter scoreFormatter;
+    DifferentAndBeforeAdvantageRule differentAndBeforeAdvantageRule(scoreFormatter);
 
     if (equalScoreRule.verifies(playerOne, playerTwo)) {
         return equalScoreRule.format(playerOne);
@@ -30,22 +27,10 @@ const std::string tennis_score(int playerOneScore, int playerTwoScore) {
         return advantageOrWinRule.format(playerOne, playerTwo);
     }
 
-    if (isScoreNotEqualAndBeforeAdvantageOrWin(playerOne, playerTwo)) {
-        return formatScoreWhenDifferentAndBeforeAdvantageOrWin(playerOne, playerTwo, scoreFormatter);
+    if (differentAndBeforeAdvantageRule.verifies(playerOne, playerTwo)) {
+        return differentAndBeforeAdvantageRule.format(playerOne, playerTwo);
     }
 
     return DEFAULT_SCORE_FORMAT;
-}
-
-std::string formatScoreWhenDifferentAndBeforeAdvantageOrWin(const Player &playerOne, const Player &playerTwo,
-                                                            ScoreFormatter &scoreFormatter) {
-    return scoreFormatter.formatScore(playerOne.getScore())
-           + SEPARATOR
-           + scoreFormatter.formatScore(playerTwo.getScore());
-}
-
-bool isScoreNotEqualAndBeforeAdvantageOrWin(const Player &playerOne, const Player &playerTwo) {
-    return (!(playerOne.getScore() == playerTwo.getScore()) &&
-            !(playerOne.getScore() >= 4 || playerTwo.getScore() >= 4));
 }
 
