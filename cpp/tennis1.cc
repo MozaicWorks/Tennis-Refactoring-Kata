@@ -2,6 +2,8 @@
 
 void scoreStringWhenEqualScores(int p1Score, std::string& score);
 
+std::string &scoreStringWhenAtLeastOneScoreIsGreaterOrEqualThanFour(int p1Score, int p2Score, std::string &score);
+
 const std::string tennis_score(int p1Score, int p2Score) {
     std::string score = "";
     int tempScore=0;
@@ -14,11 +16,7 @@ const std::string tennis_score(int p1Score, int p2Score) {
     else {
         if (atLeastOneScoreIsGreaterOrEqualThanFour)
         {
-            int minusResult = p1Score-p2Score;
-            if (minusResult==1) score ="Advantage player1";
-            else if (minusResult ==-1) score ="Advantage player2";
-            else if (minusResult>=2) score = "Win for player1";
-            else score ="Win for player2";
+            score = scoreStringWhenAtLeastOneScoreIsGreaterOrEqualThanFour(p1Score, p2Score, score);
         }
         else
         {
@@ -44,6 +42,15 @@ const std::string tennis_score(int p1Score, int p2Score) {
             }
         }
     }
+    return score;
+}
+
+std::string &scoreStringWhenAtLeastOneScoreIsGreaterOrEqualThanFour(int p1Score, int p2Score, std::string &score) {
+    int minusResult = p1Score - p2Score;
+    if (minusResult==1) score ="Advantage player1";
+            else if (minusResult ==-1) score ="Advantage player2";
+            else if (minusResult>=2) score = "Win for player1";
+            else score ="Win for player2";
     return score;
 }
 
