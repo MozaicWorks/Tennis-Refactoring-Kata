@@ -4,6 +4,9 @@ void scoreStringWhenEqualScores(int p1Score, std::string &score);
 
 std::string &scoreStringWhenAtLeastOnePlayerHasScoreOver40(int p1Score, int p2Score, std::string &score);
 
+std::string &
+scoreStringWhenScoreIsDifferentAndBeforeAdvantages(int p1Score, int p2Score, std::string &score, int tempScore);
+
 const std::string tennis_score(int p1Score, int p2Score) {
     std::string score = "";
     int tempScore = 0;
@@ -20,26 +23,32 @@ const std::string tennis_score(int p1Score, int p2Score) {
     }
 
     if (scoreIsDifferentAndBeforeAdvantages) {
-        for (int i = 1; i < 3; i++) {
-            if (i == 1) tempScore = p1Score;
-            else {
-                score += "-";
-                tempScore = p2Score;
-            }
-            switch (tempScore) {
-                case 0:
-                    score += "Love";
-                    break;
-                case 1:
-                    score += "Fifteen";
-                    break;
-                case 2:
-                    score += "Thirty";
-                    break;
-                case 3:
-                    score += "Forty";
-                    break;
-            }
+        score = scoreStringWhenScoreIsDifferentAndBeforeAdvantages(p1Score, p2Score, score, tempScore);
+    }
+    return score;
+}
+
+std::string &
+scoreStringWhenScoreIsDifferentAndBeforeAdvantages(int p1Score, int p2Score, std::string &score, int tempScore) {
+    for (int i = 1; i < 3; i++) {
+        if (i == 1) tempScore = p1Score;
+        else {
+            score += "-";
+            tempScore = p2Score;
+        }
+        switch (tempScore) {
+            case 0:
+                score += "Love";
+                break;
+            case 1:
+                score += "Fifteen";
+                break;
+            case 2:
+                score += "Thirty";
+                break;
+            case 3:
+                score += "Forty";
+                break;
         }
     }
     return score;
