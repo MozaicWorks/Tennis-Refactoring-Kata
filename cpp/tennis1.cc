@@ -53,8 +53,9 @@ std::string scoreNumberToString(int scoreValue) {
             return "Thirty";
         case 3:
             return "Forty";
+        default:
+            return "";
     }
-    return "";
 }
 
 std::string scoreStringWhenEqualScores(int scoreValue) {
