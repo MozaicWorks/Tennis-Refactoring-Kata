@@ -7,7 +7,7 @@ std::string &scoreStringWhenAtLeastOnePlayerHasScoreOver40(int p1Score, int p2Sc
 std::string
 scoreStringWhenScoreIsDifferentAndBeforeAdvantages(int p1Score, int p2Score);
 
-std::string getAnotherScoreString(int tempScore);
+std::string scoreNumberToString(int scoreValue);
 
 const std::string tennis_score(int p1Score, int p2Score) {
     std::string score = "";
@@ -31,7 +31,7 @@ const std::string tennis_score(int p1Score, int p2Score) {
 
 std::string
 scoreStringWhenScoreIsDifferentAndBeforeAdvantages(int p1Score, int p2Score) {
-    return getAnotherScoreString(p1Score) + "-" + getAnotherScoreString(p2Score);
+    return scoreNumberToString(p1Score) + "-" + scoreNumberToString(p2Score);
 }
 
 std::string &scoreStringWhenAtLeastOnePlayerHasScoreOver40(int p1Score, int p2Score, std::string &score) {
@@ -61,8 +61,8 @@ void scoreStringWhenEqualScores(int p1Score, std::string &score) {
     }
 }
 
-std::string getAnotherScoreString(int tempScore) {
-    switch (tempScore) {
+std::string scoreNumberToString(int scoreValue) {
+    switch (scoreValue) {
         case 0:
             return "Love";
         case 1:
