@@ -1,6 +1,6 @@
 #include <string>
 
-std::string &scoreStringWhenAtLeastOnePlayerHasScoreOver40(int p1Score, int p2Score, std::string &score);
+std::string scoreStringWhenAtLeastOnePlayerHasScoreOver40(int p1Score, int p2Score);
 
 std::string
 scoreStringWhenScoreIsDifferentAndBeforeAdvantages(int p1Score, int p2Score);
@@ -20,7 +20,7 @@ const std::string tennis_score(int p1Score, int p2Score) {
         score = scoreStringWhenEqualScores(p1Score);
     }
     if (scoreIsDifferentAndAtLeastOnePlayerHasScoreOver40) {
-        score = scoreStringWhenAtLeastOnePlayerHasScoreOver40(p1Score, p2Score, score);
+        score = scoreStringWhenAtLeastOnePlayerHasScoreOver40(p1Score, p2Score);
     }
 
     if (scoreIsDifferentAndBeforeAdvantages) {
@@ -34,13 +34,14 @@ scoreStringWhenScoreIsDifferentAndBeforeAdvantages(int p1Score, int p2Score) {
     return scoreNumberToString(p1Score) + "-" + scoreNumberToString(p2Score);
 }
 
-std::string &scoreStringWhenAtLeastOnePlayerHasScoreOver40(int p1Score, int p2Score, std::string &score) {
+std::string scoreStringWhenAtLeastOnePlayerHasScoreOver40(int p1Score, int p2Score) {
+    std::string scoreString = "";
     int minusResult = p1Score - p2Score;
-    if (minusResult == 1) score = "Advantage player1";
-    else if (minusResult == -1) score = "Advantage player2";
-    else if (minusResult >= 2) score = "Win for player1";
-    else score = "Win for player2";
-    return score;
+    if (minusResult == 1) scoreString = "Advantage player1";
+    else if (minusResult == -1) scoreString = "Advantage player2";
+    else if (minusResult >= 2) scoreString = "Win for player1";
+    else scoreString = "Win for player2";
+    return scoreString;
 }
 
 std::string scoreNumberToString(int scoreValue) {
