@@ -6,12 +6,12 @@ const std::string tennis_score(int p1Score, int p2Score) {
     std::string score = "";
     int tempScore=0;
     bool scoreIsEqual = (p1Score == p2Score);
+    bool atLeastOneScoreIsGreaterOrEqualThanFour = (p1Score >= 4 || p2Score >= 4);
     if (scoreIsEqual)
     {
         scoreStringWhenEqualScores(p1Score, score);
     }
     else {
-        bool atLeastOneScoreIsGreaterOrEqualThanFour = (p1Score >= 4 || p2Score >= 4);
         if (atLeastOneScoreIsGreaterOrEqualThanFour)
         {
             int minusResult = p1Score-p2Score;
