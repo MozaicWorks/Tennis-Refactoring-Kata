@@ -10,23 +10,22 @@ std::string scoreNumberToString(int scoreValue);
 std::string scoreStringWhenEqualScores(int scoreValue);
 
 const std::string tennis_score(int p1Score, int p2Score) {
-    std::string score = "";
     bool scoreIsEqual = (p1Score == p2Score);
     bool atLeastOnePlayerHasScoreOver40 = (p1Score >= 4 || p2Score >= 4);
     bool scoreIsDifferentAndAtLeastOnePlayerHasScoreOver40 = !scoreIsEqual && atLeastOnePlayerHasScoreOver40;
     bool scoreIsDifferentAndBeforeAdvantages = !scoreIsEqual && !atLeastOnePlayerHasScoreOver40;
 
     if (scoreIsEqual) {
-        score = scoreStringWhenEqualScores(p1Score);
+        return scoreStringWhenEqualScores(p1Score);
     }
     if (scoreIsDifferentAndAtLeastOnePlayerHasScoreOver40) {
-        score = scoreStringWhenAtLeastOnePlayerHasScoreOver40(p1Score, p2Score);
+        return scoreStringWhenAtLeastOnePlayerHasScoreOver40(p1Score, p2Score);
     }
 
     if (scoreIsDifferentAndBeforeAdvantages) {
-        score = scoreStringWhenScoreIsDifferentAndBeforeAdvantages(p1Score, p2Score);
+        return scoreStringWhenScoreIsDifferentAndBeforeAdvantages(p1Score, p2Score);
     }
-    return score;
+    return "";
 }
 
 std::string
