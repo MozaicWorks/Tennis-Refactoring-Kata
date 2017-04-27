@@ -1,26 +1,13 @@
 #include <string>
 
+void scoreStringWhenEqualScores(int p1Score, std::string& score);
+
 const std::string tennis_score(int p1Score, int p2Score) {
     std::string score = "";
     int tempScore=0;
     if (p1Score==p2Score)
     {
-        switch (p1Score)
-        {
-            case 0:
-                    score = "Love-All";
-                break;
-            case 1:
-                    score = "Fifteen-All";
-                break;
-            case 2:
-                    score = "Thirty-All";
-                break;
-            default:
-                    score = "Deuce";
-                break;
-            
-        }
+        scoreStringWhenEqualScores(p1Score, score);
     }
     else if (p1Score>=4 || p2Score>=4)
     {
