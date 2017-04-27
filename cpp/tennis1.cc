@@ -5,11 +5,12 @@ void scoreStringWhenEqualScores(int p1Score, std::string &score);
 std::string &scoreStringWhenAtLeastOnePlayerHasScoreOver40(int p1Score, int p2Score, std::string &score);
 
 std::string &
-scoreStringWhenScoreIsDifferentAndBeforeAdvantages(int p1Score, int p2Score, std::string &score, int tempScore);
+scoreStringWhenScoreIsDifferentAndBeforeAdvantages(int p1Score, int p2Score, std::string &score);
+
+std::string &getSomeScoreString(std::string &score, int tempScore);
 
 const std::string tennis_score(int p1Score, int p2Score) {
     std::string score = "";
-    int tempScore = 0;
     bool scoreIsEqual = (p1Score == p2Score);
     bool atLeastOnePlayerHasScoreOver40 = (p1Score >= 4 || p2Score >= 4);
     bool scoreIsDifferentAndAtLeastOnePlayerHasScoreOver40 = !scoreIsEqual && atLeastOnePlayerHasScoreOver40;
@@ -23,33 +24,33 @@ const std::string tennis_score(int p1Score, int p2Score) {
     }
 
     if (scoreIsDifferentAndBeforeAdvantages) {
-        score = scoreStringWhenScoreIsDifferentAndBeforeAdvantages(p1Score, p2Score, score, tempScore);
+        score = scoreStringWhenScoreIsDifferentAndBeforeAdvantages(p1Score, p2Score, score);
     }
     return score;
 }
 
 std::string &
-scoreStringWhenScoreIsDifferentAndBeforeAdvantages(int p1Score, int p2Score, std::string &score, int tempScore) {
-    for (int i = 1; i < 3; i++) {
-        if (i == 1) tempScore = p1Score;
-        else {
-            score += "-";
-            tempScore = p2Score;
-        }
-        switch (tempScore) {
-            case 0:
-                score += "Love";
-                break;
-            case 1:
-                score += "Fifteen";
-                break;
-            case 2:
-                score += "Thirty";
-                break;
-            case 3:
-                score += "Forty";
-                break;
-        }
+scoreStringWhenScoreIsDifferentAndBeforeAdvantages(int p1Score, int p2Score, std::string &score) {
+    score = getSomeScoreString(score, p1Score);
+    score += "-";
+    score = getSomeScoreString(score, p2Score);
+    return score;
+}
+
+std::string &getSomeScoreString(std::string &score, int tempScore) {
+    switch (tempScore) {
+        case 0:
+            score += "Love";
+            break;
+        case 1:
+            score += "Fifteen";
+            break;
+        case 2:
+            score += "Thirty";
+            break;
+        case 3:
+            score += "Forty";
+            break;
     }
     return score;
 }
