@@ -55,3 +55,22 @@ const std::string tennis_score(int p1Score, int p2Score) {
     }
     return score;
 }
+
+
+void scoreStringWhenEqualScores(int p1Score, std::string& score){
+    switch (p1Score)
+    {
+        case 0:
+            score = "Love-All";
+            break;
+        case 1:
+            score = "Fifteen-All";
+            break;
+        case 2:
+            score = "Thirty-All";
+            break;
+        default:
+            score = "Deuce";
+            break;
+    }
+}
