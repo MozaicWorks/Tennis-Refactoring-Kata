@@ -13,12 +13,12 @@ const std::string tennis_score(int p1Score, int p2Score) {
     {
         scoreStringWhenEqualScores(p1Score, score);
     }
-    else {
-        if (atLeastOneScoreIsGreaterOrEqualThanFour)
+        if (!scoreIsEqual && atLeastOneScoreIsGreaterOrEqualThanFour)
         {
             score = scoreStringWhenAtLeastOneScoreIsGreaterOrEqualThanFour(p1Score, p2Score, score);
         }
-        else
+
+        if(!scoreIsEqual && !atLeastOneScoreIsGreaterOrEqualThanFour)
         {
             for (int i=1; i<3; i++)
             {
@@ -41,7 +41,6 @@ const std::string tennis_score(int p1Score, int p2Score) {
                 }
             }
         }
-    }
     return score;
 }
 
