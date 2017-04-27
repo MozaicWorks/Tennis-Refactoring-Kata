@@ -5,7 +5,8 @@ void scoreStringWhenEqualScores(int p1Score, std::string& score);
 const std::string tennis_score(int p1Score, int p2Score) {
     std::string score = "";
     int tempScore=0;
-    if (p1Score==p2Score)
+    bool scoreIsEqual = (p1Score == p2Score);
+    if (scoreIsEqual)
     {
         scoreStringWhenEqualScores(p1Score, score);
     }
