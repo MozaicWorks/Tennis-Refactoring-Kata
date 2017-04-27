@@ -18,6 +18,7 @@ const std::string tennis_score(int p1Score, int p2Score) {
     if (scoreIsEqual) {
         return scoreStringWhenEqualScores(p1Score);
     }
+
     if (scoreIsDifferentAndAtLeastOnePlayerHasScoreOver40) {
         return scoreStringWhenAtLeastOnePlayerHasScoreOver40(p1Score, p2Score);
     }
@@ -40,9 +41,16 @@ std::string scoreStringWhenAtLeastOnePlayerHasScoreOver40(int p1Score, int p2Sco
     int minusResult = p1Score - p2Score;
     if (minusResult == 1) {
         scoreString = "Advantage " + p1Name;
-    } else if (minusResult == -1) scoreString = "Advantage " + p2Name;
-    else if (minusResult >= 2) scoreString = "Win for " + p1Name;
-    else scoreString = "Win for " + p2Name;
+    }
+    if (minusResult == -1) {
+        scoreString = "Advantage " + p2Name;
+    }
+    if (minusResult >= 2) {
+        scoreString = "Win for " + p1Name;
+    }
+    if (minusResult <= -2) {
+        scoreString = "Win for " + p2Name;
+    }
     return scoreString;
 }
 
