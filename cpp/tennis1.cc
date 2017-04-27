@@ -35,11 +35,14 @@ scoreStringWhenScoreIsDifferentAndBeforeAdvantages(int p1Score, int p2Score) {
 
 std::string scoreStringWhenAtLeastOnePlayerHasScoreOver40(int p1Score, int p2Score) {
     std::string scoreString = "";
+    const std::string p1Name = "player1";
+    const std::string p2Name = "player2";
     int minusResult = p1Score - p2Score;
-    if (minusResult == 1) scoreString = "Advantage player1";
-    else if (minusResult == -1) scoreString = "Advantage player2";
-    else if (minusResult >= 2) scoreString = "Win for player1";
-    else scoreString = "Win for player2";
+    if (minusResult == 1) {
+        scoreString = "Advantage " + p1Name;
+    } else if (minusResult == -1) scoreString = "Advantage " + p2Name;
+    else if (minusResult >= 2) scoreString = "Win for " + p1Name;
+    else scoreString = "Win for " + p2Name;
     return scoreString;
 }
 
