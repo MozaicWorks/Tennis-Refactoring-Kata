@@ -1,13 +1,13 @@
 #include <string>
 
-void scoreStringWhenEqualScores(int p1Score, std::string &score);
-
 std::string &scoreStringWhenAtLeastOnePlayerHasScoreOver40(int p1Score, int p2Score, std::string &score);
 
 std::string
 scoreStringWhenScoreIsDifferentAndBeforeAdvantages(int p1Score, int p2Score);
 
 std::string scoreNumberToString(int scoreValue);
+
+std::string scoreStringWhenEqualScores(int scoreValue);
 
 const std::string tennis_score(int p1Score, int p2Score) {
     std::string score = "";
@@ -17,7 +17,7 @@ const std::string tennis_score(int p1Score, int p2Score) {
     bool scoreIsDifferentAndBeforeAdvantages = !scoreIsEqual && !atLeastOnePlayerHasScoreOver40;
 
     if (scoreIsEqual) {
-        scoreStringWhenEqualScores(p1Score, score);
+        score = scoreStringWhenEqualScores(p1Score);
     }
     if (scoreIsDifferentAndAtLeastOnePlayerHasScoreOver40) {
         score = scoreStringWhenAtLeastOnePlayerHasScoreOver40(p1Score, p2Score, score);
@@ -43,24 +43,6 @@ std::string &scoreStringWhenAtLeastOnePlayerHasScoreOver40(int p1Score, int p2Sc
     return score;
 }
 
-
-void scoreStringWhenEqualScores(int p1Score, std::string &score) {
-    switch (p1Score) {
-        case 0:
-            score = "Love-All";
-            break;
-        case 1:
-            score = "Fifteen-All";
-            break;
-        case 2:
-            score = "Thirty-All";
-            break;
-        default:
-            score = "Deuce";
-            break;
-    }
-}
-
 std::string scoreNumberToString(int scoreValue) {
     switch (scoreValue) {
         case 0:
@@ -73,4 +55,17 @@ std::string scoreNumberToString(int scoreValue) {
             return "Forty";
     }
     return "";
+}
+
+std::string scoreStringWhenEqualScores(int scoreValue) {
+    switch (scoreValue) {
+        case 0:
+            return "Love-All";
+        case 1:
+            return "Fifteen-All";
+        case 2:
+            return "Thirty-All";
+        default:
+            return "Deuce";
+    }
 }
