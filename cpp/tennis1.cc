@@ -1,4 +1,5 @@
 #include <string>
+#include "Player.h"
 
 std::string
 scoreStringWhenAtLeastOnePlayerHasScoreOver40(int p1Score, int p2Score, std::string &p1Name, std::string &p2Name);
@@ -14,21 +15,24 @@ const std::string tennis_score(int p1Score, int p2Score) {
     std::string p1Name = "player1";
     std::string p2Name = "player2";
 
-    bool scoreIsEqual = (p1Score == p2Score);
-    bool atLeastOnePlayerHasScoreOver40 = (p1Score >= 4 || p2Score >= 4);
+    Player player1(p1Name, p1Score);
+    Player player2(p2Name, p2Score);
+
+    bool scoreIsEqual = (player1.getScore() == p2Score);
+    bool atLeastOnePlayerHasScoreOver40 = (player1.getScore() >= 4 || p2Score >= 4);
     bool scoreIsDifferentAndAtLeastOnePlayerHasScoreOver40 = !scoreIsEqual && atLeastOnePlayerHasScoreOver40;
     bool scoreIsDifferentAndBeforeAdvantages = !scoreIsEqual && !atLeastOnePlayerHasScoreOver40;
 
     if (scoreIsEqual) {
-        return scoreStringWhenEqualScores(p1Score);
+        return scoreStringWhenEqualScores(player1.getScore());
     }
 
     if (scoreIsDifferentAndAtLeastOnePlayerHasScoreOver40) {
-        return scoreStringWhenAtLeastOnePlayerHasScoreOver40(p1Score, p2Score, p1Name, p2Name);
+        return scoreStringWhenAtLeastOnePlayerHasScoreOver40(player1.getScore(), p2Score, player1.getName(), p2Name);
     }
 
     if (scoreIsDifferentAndBeforeAdvantages) {
-        return scoreStringWhenScoreIsDifferentAndBeforeAdvantages(p1Score, p2Score);
+        return scoreStringWhenScoreIsDifferentAndBeforeAdvantages(player1.getScore(), p2Score);
     }
     return "";
 }
