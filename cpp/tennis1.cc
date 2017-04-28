@@ -18,8 +18,8 @@ const std::string tennis_score(int p1Score, int p2Score) {
     Player player1(p1Name, p1Score);
     Player player2(p2Name, p2Score);
 
-    bool scoreIsEqual = (player1.getScore() == p2Score);
-    bool atLeastOnePlayerHasScoreOver40 = (player1.getScore() >= 4 || p2Score >= 4);
+    bool scoreIsEqual = (player1.getScore() == player2.getScore());
+    bool atLeastOnePlayerHasScoreOver40 = (player1.getScore() >= 4 || player2.getScore() >= 4);
     bool scoreIsDifferentAndAtLeastOnePlayerHasScoreOver40 = !scoreIsEqual && atLeastOnePlayerHasScoreOver40;
     bool scoreIsDifferentAndBeforeAdvantages = !scoreIsEqual && !atLeastOnePlayerHasScoreOver40;
 
@@ -28,11 +28,11 @@ const std::string tennis_score(int p1Score, int p2Score) {
     }
 
     if (scoreIsDifferentAndAtLeastOnePlayerHasScoreOver40) {
-        return scoreStringWhenAtLeastOnePlayerHasScoreOver40(player1.getScore(), p2Score, player1.getName(), p2Name);
+        return scoreStringWhenAtLeastOnePlayerHasScoreOver40(player1.getScore(), player2.getScore(), player1.getName(), p2Name);
     }
 
     if (scoreIsDifferentAndBeforeAdvantages) {
-        return scoreStringWhenScoreIsDifferentAndBeforeAdvantages(player1.getScore(), p2Score);
+        return scoreStringWhenScoreIsDifferentAndBeforeAdvantages(player1.getScore(), player2.getScore());
     }
     return "";
 }
