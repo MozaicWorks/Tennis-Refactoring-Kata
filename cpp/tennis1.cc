@@ -1,4 +1,5 @@
 #include <string>
+#include <map>
 #include "Player.h"
 
 std::string
@@ -53,29 +54,22 @@ std::string formatAdvantageOrWin(const std::string &p1Name, int minusResult) {
 }
 
 std::string scoreNumberToString(int scoreValue) {
-    switch (scoreValue) {
-        case 0:
-            return "Love";
-        case 1:
-            return "Fifteen";
-        case 2:
-            return "Thirty";
-        case 3:
-            return "Forty";
-        default:
-            return "";
-    }
+    std::map<int, std::string> scoreToScoreValues = {
+            {0, "Love"},
+            {1, "Fifteen"},
+            {2, "Thirty"},
+            {3, "Forty"}
+    };
+    return scoreToScoreValues[scoreValue];
 }
 
 std::string scoreStringWhenEqualScores(int scoreValue) {
-    switch (scoreValue) {
-        case 0:
-            return "Love-All";
-        case 1:
-            return "Fifteen-All";
-        case 2:
-            return "Thirty-All";
-        default:
-            return "Deuce";
-    }
+    std::map<int, std::string> equalScoreToScoreValues = {
+            {0, "Love-All"},
+            {1, "Fifteen-All"},
+            {2, "Thirty-All"},
+            {3, "Deuce"}
+    };
+    bool foundScoreValue = equalScoreToScoreValues.find(scoreValue) != equalScoreToScoreValues.end();
+    return foundScoreValue ? equalScoreToScoreValues[scoreValue] : "Deuce";
 }
