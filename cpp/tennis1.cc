@@ -24,13 +24,11 @@ const std::string tennis_score(int p1Score, int p2Score) {
         return scoreStringWhenEqualScores(player1.getScore());
     }
 
-    if (scoreIsDifferentAndAtLeastOnePlayerHasScoreOver40) {
-        if (player1.getScore() - player2.getScore() > 0)
-            return formatAdvantageOrWin(player1.getName(), player1.getScore() - player2.getScore());
+    if (scoreIsDifferentAndAtLeastOnePlayerHasScoreOver40 && (player1.getScore() - player2.getScore() > 0))
+        return formatAdvantageOrWin(player1.getName(), player1.getScore() - player2.getScore());
 
-        if (player1.getScore() - player2.getScore() < 0) {
-            return formatAdvantageOrWin(player2.getName(), -(player1.getScore() - player2.getScore()));
-        }
+    if (scoreIsDifferentAndAtLeastOnePlayerHasScoreOver40 && player1.getScore() - player2.getScore() < 0) {
+        return formatAdvantageOrWin(player2.getName(), -(player1.getScore() - player2.getScore()));
     }
 
     if (scoreIsDifferentAndBeforeAdvantages) {
