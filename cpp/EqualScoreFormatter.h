@@ -3,7 +3,8 @@
 
 
 class EqualScoreFormatter {
-
+public:
+    std::string scoreStringWhenEqualScores(int scoreValue);
 };
 
 
