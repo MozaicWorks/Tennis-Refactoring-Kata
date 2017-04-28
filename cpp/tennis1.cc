@@ -25,11 +25,12 @@ const std::string tennis_score(int p1Score, int p2Score) {
         return scoreStringWhenEqualScores(player1.getScore());
     }
 
-    if (scoreIsDifferentAndAtLeastOnePlayerHasScoreOver40 && (player1.getScore() - player2.getScore() > 0))
-        return formatAdvantageOrWin(player1.getName(), player1.getScore() - player2.getScore());
+    int scoreDifference = (player1.getScore() - player2.getScore());
+    if (scoreIsDifferentAndAtLeastOnePlayerHasScoreOver40 && (scoreDifference > 0))
+        return formatAdvantageOrWin(player1.getName(), scoreDifference);
 
-    if (scoreIsDifferentAndAtLeastOnePlayerHasScoreOver40 && player1.getScore() - player2.getScore() < 0) {
-        return formatAdvantageOrWin(player2.getName(), -(player1.getScore() - player2.getScore()));
+    if (scoreIsDifferentAndAtLeastOnePlayerHasScoreOver40 && scoreDifference < 0) {
+        return formatAdvantageOrWin(player2.getName(), -scoreDifference);
     }
 
     if (scoreIsDifferentAndBeforeAdvantages) {
@@ -54,22 +55,22 @@ std::string formatAdvantageOrWin(const std::string &p1Name, int minusResult) {
 }
 
 std::string scoreNumberToString(int scoreValue) {
-    std::map<int, std::string> scoreToScoreValues = {
+    std::map<int, std::string> scoreToScoreStrings = {
             {0, "Love"},
             {1, "Fifteen"},
             {2, "Thirty"},
             {3, "Forty"}
     };
-    return scoreToScoreValues[scoreValue];
+    return scoreToScoreStrings[scoreValue];
 }
 
 std::string scoreStringWhenEqualScores(int scoreValue) {
-    std::map<int, std::string> equalScoreToScoreValues = {
+    std::map<int, std::string> equalScoresToStrings = {
             {0, "Love-All"},
             {1, "Fifteen-All"},
             {2, "Thirty-All"},
             {3, "Deuce"}
     };
-    bool foundScoreValue = equalScoreToScoreValues.find(scoreValue) != equalScoreToScoreValues.end();
-    return foundScoreValue ? equalScoreToScoreValues[scoreValue] : "Deuce";
+    bool foundScoreValue = equalScoresToStrings.find(scoreValue) != equalScoresToStrings.end();
+    return foundScoreValue ? equalScoresToStrings[scoreValue] : "Deuce";
 }
