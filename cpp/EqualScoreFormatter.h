@@ -5,11 +5,14 @@
 class EqualScoreFormatter {
 private:
     int score;
+    int secondScore;
 
 public:
-    EqualScoreFormatter(int playerScore);
+    EqualScoreFormatter(int playerScore, int secondScore);
 
     std::string format();
+
+    bool applies();
 };
 
 

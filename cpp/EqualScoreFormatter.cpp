@@ -14,5 +14,10 @@ std::string EqualScoreFormatter::format() {
     return foundScoreValue ? equalScoresToStrings[score] : "Deuce";
 }
 
-EqualScoreFormatter::EqualScoreFormatter(int playerScore) : score(playerScore) {
+EqualScoreFormatter::EqualScoreFormatter(int playerScore, int secondScore) : score(playerScore),
+                                                                             secondScore(secondScore) {
+}
+
+bool EqualScoreFormatter::applies() {
+    return score == secondScore;
 }

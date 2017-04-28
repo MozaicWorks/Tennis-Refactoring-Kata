@@ -15,14 +15,14 @@ const std::string tennis_score(int p1Score, int p2Score) {
     Player player1("player1", p1Score);
     Player player2("player2", p2Score);
 
-    EqualScoreFormatter equalScoreFormatter(player1.getScore());
+    EqualScoreFormatter equalScoreFormatter(player1.getScore(), player2.getScore());
 
     bool scoreIsEqual = (player1.getScore() == player2.getScore());
     bool atLeastOnePlayerHasScoreOver40 = (player1.getScore() >= 4 || player2.getScore() >= 4);
     bool scoreIsDifferentAndAtLeastOnePlayerHasScoreOver40 = !scoreIsEqual && atLeastOnePlayerHasScoreOver40;
     bool scoreIsDifferentAndBeforeAdvantages = !scoreIsEqual && !atLeastOnePlayerHasScoreOver40;
 
-    if (scoreIsEqual) {
+    if (equalScoreFormatter.applies()) {
         return equalScoreFormatter.format();
     }
 
