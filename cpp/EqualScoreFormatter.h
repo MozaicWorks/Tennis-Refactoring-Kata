@@ -3,8 +3,13 @@
 
 
 class EqualScoreFormatter {
+private:
+    int score;
+
 public:
-    std::string scoreStringWhenEqualScores(int scoreValue);
+    EqualScoreFormatter(int playerScore);
+
+    std::string format();
 };
 
 

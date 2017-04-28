@@ -3,13 +3,16 @@
 #include "EqualScoreFormatter.h"
 
 
-std::string EqualScoreFormatter::scoreStringWhenEqualScores(int scoreValue) {
-    std::map<int, std::__cxx11::string> equalScoresToStrings = {
+std::string EqualScoreFormatter::format() {
+    std::map<int, std::string> equalScoresToStrings = {
             {0, "Love-All"},
             {1, "Fifteen-All"},
             {2, "Thirty-All"},
             {3, "Deuce"}
     };
-    bool foundScoreValue = equalScoresToStrings.find(scoreValue) != equalScoresToStrings.end();
-    return foundScoreValue ? equalScoresToStrings[scoreValue] : "Deuce";
+    bool foundScoreValue = equalScoresToStrings.find(score) != equalScoresToStrings.end();
+    return foundScoreValue ? equalScoresToStrings[score] : "Deuce";
+}
+
+EqualScoreFormatter::EqualScoreFormatter(int playerScore) : score(playerScore) {
 }
