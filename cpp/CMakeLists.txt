@@ -11,7 +11,7 @@ set(SOURCE_FILES
         #         tennis2.cc
         #         tennis3.cc
         test_suite.tests.cpp
-        tennis.h Player.cpp Player.h)
+        tennis.h Player.cpp Player.h EqualScoreFormatter.cpp EqualScoreFormatter.h)
 
 add_executable(run.tests ${SOURCE_FILES})
 add_custom_target(runAllTests ALL COMMAND run.tests)
