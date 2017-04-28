@@ -47,15 +47,11 @@ std::string
 scoreStringWhenAtLeastOnePlayerHasScoreOver40(int p1Score, int p2Score, std::string &p1Name, std::string &p2Name) {
     std::string scoreString = "";
     int minusResult = p1Score - p2Score;
-    scoreString = formatAdvantageOrWin(p1Name, minusResult);
+    if (minusResult > 0)
+        scoreString = formatAdvantageOrWin(p1Name, minusResult);
 
-    minusResult = p2Score - p1Score;
-
-    if (minusResult == 1) {
-        scoreString = "Advantage " + p2Name;
-    }
-    if (minusResult >= 2) {
-        scoreString = "Win for " + p2Name;
+    if (minusResult < 0) {
+        scoreString = formatAdvantageOrWin(p2Name, -minusResult);
     }
     return scoreString;
 }
