@@ -2,7 +2,7 @@
 #include "Player.h"
 
 std::string
-scoreStringWhenAtLeastOnePlayerHasScoreOver40(int p1Score, int p2Score, std::string &p1Name, std::string &p2Name);
+scoreStringWhenAtLeastOnePlayerHasScoreOver40(std::string &p2Name, int p2Score, Player player1);
 
 std::string
 scoreStringWhenScoreIsDifferentAndBeforeAdvantages(int p1Score, int p2Score);
@@ -28,8 +28,8 @@ const std::string tennis_score(int p1Score, int p2Score) {
     }
 
     if (scoreIsDifferentAndAtLeastOnePlayerHasScoreOver40) {
-        return scoreStringWhenAtLeastOnePlayerHasScoreOver40(player1.getScore(), player2.getScore(), player1.getName(),
-                                                             player2.getName());
+        return scoreStringWhenAtLeastOnePlayerHasScoreOver40(player2.getName(), player2.getScore(),
+                                                             player1);
     }
 
     if (scoreIsDifferentAndBeforeAdvantages) {
@@ -44,11 +44,11 @@ scoreStringWhenScoreIsDifferentAndBeforeAdvantages(int p1Score, int p2Score) {
 }
 
 std::string
-scoreStringWhenAtLeastOnePlayerHasScoreOver40(int p1Score, int p2Score, std::string &p1Name, std::string &p2Name) {
+scoreStringWhenAtLeastOnePlayerHasScoreOver40(std::string &p2Name, int p2Score, Player player1) {
     std::string scoreString = "";
-    int minusResult = p1Score - p2Score;
+    int minusResult = player1.getScore() - p2Score;
     if (minusResult > 0)
-        scoreString = formatAdvantageOrWin(p1Name, minusResult);
+        scoreString = formatAdvantageOrWin(player1.getName(), minusResult);
 
     if (minusResult < 0) {
         scoreString = formatAdvantageOrWin(p2Name, -minusResult);
