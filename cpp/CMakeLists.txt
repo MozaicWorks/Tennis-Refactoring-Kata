@@ -1,17 +1,8 @@
-cmake_minimum_required(VERSION 3.7)
-project(cpp)
+project(Tennis-Refactoring)
 
-set(CMAKE_CXX_STANDARD 11)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Werror -O")
+add_definitions(-DUSE_CMAKE)
+include_directories(${CMAKE_SOURCE_DIR})
 
-set(SOURCE_FILES
-        all_tests.cpp
-        all_tests.hpp
-        tennis1.cc
-        #         tennis2.cc
-        #         tennis3.cc
-        test_suite.tests.cpp
-        tennis.h)
-
-add_executable(run.tests ${SOURCE_FILES})
-add_custom_target(runAllTests ALL COMMAND run.tests)
+add_executable(tennis1_tests tennis1.cc all_tests.cpp all_tests.hpp test_suite.tests.cpp)
+add_executable(tennis2_tests tennis2.cc all_tests.cpp all_tests.hpp test_suite.tests.cpp)
+add_executable(tennis3_tests tennis3.cc all_tests.cpp all_tests.hpp test_suite.tests.cpp)
